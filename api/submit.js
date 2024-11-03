@@ -29,14 +29,14 @@ async function appendToSheet(ordinalsAddress, status) {
         console.log("Data appended successfully:", response.data);
         return response.data;
     } catch (error) {
-        console.error("Error appending to Google Sheet:", error);
+        console.error("Error appending to Google Sheet:", error.message);
         throw error;
     }
 }
 
 module.exports = async (req, res) => {
     console.log("API /submit endpoint hit");
-    
+
     if (req.method === 'POST') {
         const { ordinalsAddress } = req.body;
         console.log("Received ordinalsAddress:", ordinalsAddress);
@@ -59,7 +59,7 @@ module.exports = async (req, res) => {
             res.json({ message: "Submission successfully recorded!", redirectUrl: twitterUrl });
 
         } catch (error) {
-            console.error("Error recording submission:", error);
+            console.error("Error recording submission:", error.message);
             res.status(500).json({ message: "Error recording submission. Please try again later." });
         }
     } else {
