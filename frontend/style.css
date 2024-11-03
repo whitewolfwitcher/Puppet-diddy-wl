@@ -1,0 +1,117 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Hero Section */
+.hero {
+    background-image: url('https://imagedelivery.net/JqdqBtCE6utJlucTEgZ1BA/f10b7cc3-9514-41c8-71f2-8d6f97257500/public');
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    padding: 100px 20px;
+    position: relative;
+}
+
+/* Colorful Title */
+.hero h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+    background: linear-gradient(90deg, #ff6f61, #ffcc33, #4caf50, #2196f3, #673ab7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: #ff6f61;
+}
+
+/* Subtitle */
+.hero p {
+    font-size: 3em;
+    color: #0c0601;
+}
+
+/* Form Section */
+.form-section {
+    padding: 50px 20px;
+    text-align: center;
+    background-color: #f4f4f9;
+}
+
+.form-section h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.form-section form {
+    max-width: 500px;
+    margin: auto;
+}
+
+.form-section input, .form-section button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 1em;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.form-section button {
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+.form-section button:hover {
+    background-color: #555;
+}
+
+/* Slider Section */
+.slider-section {
+    padding: 50px 20px;
+    background-color: #333;
+    color: white;
+    text-align: center;
+}
+
+.slider {
+    max-width: 1500px;
+    height: 400px;
+    margin: auto;
+    overflow: hidden;
+    position: relative;
+}
+
+.slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slides img {
+    width: 100%;
+    height: auto;
+    max-height: 100%; /* Constrain the image height within the slider */
+    object-fit: contain; /* Maintain aspect ratio and fit within container */
+    border-radius: 5px;
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 900px) {
+    .hero h1 {
+        font-size: 2.5em;
+    }
+
+    .slider {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .slides img {
+        width: 100vw;
+        height: auto;
+    }
+}
