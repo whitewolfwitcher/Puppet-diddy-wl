@@ -9,7 +9,8 @@ document.getElementById("submission-form").addEventListener("submit", async func
     }
 
     try {
-        const response = await fetch('/api/submit', {  // This will automatically use the deployed Vercel URL
+        // Use the full URL to the API endpoint on Vercel
+        const response = await fetch('https://puppet-diddy-wl.vercel.app/api/submit', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -22,6 +23,7 @@ document.getElementById("submission-form").addEventListener("submit", async func
         if (response.ok) {
             alert(result.message);
 
+            // Check if there's a redirect URL and open it
             if (result.redirectUrl) {
                 window.open(result.redirectUrl, "_blank");
             }
