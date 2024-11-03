@@ -10,7 +10,7 @@ document.getElementById("submission-form").addEventListener("submit", async func
 
     try {
         // Use the full deployment URL for the API endpoint
-        const response = await fetch('https://puppet-diddy-4ifggwlu5-witchers-projects-89d7c206.vercel.app/api/submit', {
+        const response = await fetch('https://puppet-diddy-wl.vercel.app/api/submit', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
