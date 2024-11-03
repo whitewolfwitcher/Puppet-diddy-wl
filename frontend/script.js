@@ -1,5 +1,5 @@
 document.getElementById("submission-form").addEventListener("submit", async function (e) {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault();
 
     const ordinalsAddress = document.getElementById("ordinalsAddress").value;
 
@@ -9,8 +9,7 @@ document.getElementById("submission-form").addEventListener("submit", async func
     }
 
     try {
-        // Send the data to the backend
-        const response = await fetch('/submit', {
+        const response = await fetch('/api/submit', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -21,17 +20,14 @@ document.getElementById("submission-form").addEventListener("submit", async func
         const result = await response.json();
 
         if (response.ok) {
-            // Show success message
             alert(result.message);
 
-            // Define the tweet content
             const tweetText = encodeURIComponent(
-                `🚀 Diddylist Alert!\n\nJoining the DiddyPuppets whitelist 🐶✨\n\nHere’s my address: ${ordinalsAddress}\n\nGet in on the action and apply here: ord.io/......`
+                `🚀 @DiddyPuppets Alert!\n\nJoining the DiddyPuppets whitelist 🐶✨\n\nHere’s my address: ${ordinalsAddress}\n\nGet in on the action and apply here: ord.io/...`
             );
 
-            // Open Twitter post link with pre-filled tweet
             const twitterUrl = `https://twitter.com/intent/tweet?text=${tweetText}`;
-            window.open(twitterUrl, "_blank"); // Open Twitter in a new tab
+            window.open(twitterUrl, "_blank");
         } else {
             console.error("Error:", result.message);
             alert("Error submitting data: " + result.message);
