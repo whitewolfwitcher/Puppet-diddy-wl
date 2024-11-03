@@ -9,7 +9,7 @@ document.getElementById("submission-form").addEventListener("submit", async func
     }
 
     try {
-        const response = await fetch('https://puppet-diddy-wl-95dv-e12nnharj-witchers-projects-89d7c206.vercel.app/api/submit', {
+        const response = await fetch('/api/submit', {  // This will automatically use the deployed Vercel URL
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -22,12 +22,9 @@ document.getElementById("submission-form").addEventListener("submit", async func
         if (response.ok) {
             alert(result.message);
 
-            const tweetText = encodeURIComponent(
-                `🚀 @DiddyPuppets Alert!\n\nJoining the DiddyPuppets whitelist 🐶✨\n\nHere’s my address: ${ordinalsAddress}\n\nGet in on the action and apply here: ord.io/...`
-            );
-
-            const twitterUrl = `https://twitter.com/intent/tweet?text=${tweetText}`;
-            window.open(twitterUrl, "_blank");
+            if (result.redirectUrl) {
+                window.open(result.redirectUrl, "_blank");
+            }
         } else {
             console.error("Error:", result.message);
             alert("Error submitting data: " + result.message);
