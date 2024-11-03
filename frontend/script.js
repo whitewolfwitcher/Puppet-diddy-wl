@@ -9,7 +9,7 @@ document.getElementById("submission-form").addEventListener("submit", async func
     }
 
     try {
-        const response = await fetch('https://puppet-diddy-wl-95dv-e12nnharj-witchers-projects-89d7c206.vercel.app', {
+        const response = await fetch('https://puppet-diddy-wl-95dv-e12nnharj-witchers-projects-89d7c206.vercel.app/api/submit', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
