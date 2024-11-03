@@ -5,6 +5,7 @@ async function appendToSheet(ordinalsAddress, status) {
     try {
         // Parse credentials from environment variables
         const credentials = JSON.parse(process.env.GOOGLE_CREDENTIALS);
+        console.log("Credentials parsed successfully.");
 
         const auth = new google.auth.GoogleAuth({
             credentials,
@@ -13,6 +14,7 @@ async function appendToSheet(ordinalsAddress, status) {
 
         const client = await auth.getClient();
         const sheets = google.sheets({ version: 'v4', auth: client });
+        console.log("Google Sheets client initialized.");
 
         const request = {
             spreadsheetId: process.env.SPREADSHEET_ID, // Use environment variable for Spreadsheet ID
@@ -33,17 +35,22 @@ async function appendToSheet(ordinalsAddress, status) {
 }
 
 module.exports = async (req, res) => {
+    console.log("API /submit endpoint hit");
+    
     if (req.method === 'POST') {
         const { ordinalsAddress } = req.body;
         console.log("Received ordinalsAddress:", ordinalsAddress);
 
         if (!ordinalsAddress) {
+            console.log("No ordinals address provided");
             return res.status(400).json({ message: "Ordinals address is required." });
         }
 
         try {
             const status = 'False';
+            console.log("Calling appendToSheet...");
             await appendToSheet(ordinalsAddress, status);
+            console.log("appendToSheet call successful");
 
             // Send success message and Twitter redirect URL back to the frontend
             const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
