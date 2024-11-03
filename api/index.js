@@ -15,8 +15,8 @@ async function appendToSheet(ordinalsAddress, status) {
         const sheets = google.sheets({ version: 'v4', auth: client });
 
         const request = {
-            spreadsheetId: process.env.SPREADSHEET_ID,
-            range: 'diddy',
+            spreadsheetId: process.env.SPREADSHEET_ID, // Use environment variable for Spreadsheet ID
+            range: 'diddy', // Sheet name or range
             valueInputOption: 'RAW',
             resource: {
                 values: [[ordinalsAddress, status]]
@@ -35,6 +35,7 @@ async function appendToSheet(ordinalsAddress, status) {
 module.exports = async (req, res) => {
     if (req.method === 'POST') {
         const { ordinalsAddress } = req.body;
+        console.log("Received ordinalsAddress:", ordinalsAddress);
 
         if (!ordinalsAddress) {
             return res.status(400).json({ message: "Ordinals address is required." });
@@ -44,13 +45,11 @@ module.exports = async (req, res) => {
             const status = 'False';
             await appendToSheet(ordinalsAddress, status);
 
-            res.json({ message: "Submission successfully recorded!" });
-
-            // Redirect to Twitter post page
+            // Send success message and Twitter redirect URL back to the frontend
             const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
                 `🚀 Diddylist Alert!\n\nJoining the DiddyPuppets whitelist 🐶✨\n\nHere’s my address: ${ordinalsAddress}\n\nGet in on the action and apply here: ord.io/...`
             )}`;
-            res.redirect(twitterUrl);
+            res.json({ message: "Submission successfully recorded!", redirectUrl: twitterUrl });
 
         } catch (error) {
             console.error("Error recording submission:", error);
