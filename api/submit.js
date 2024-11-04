@@ -7,13 +7,12 @@ async function appendToSheet(ordinalsAddress, status) {
         const credentials = JSON.parse(process.env.GOOGLE_CREDENTIALS);
         console.log("Credentials parsed successfully.");
 
-        const auth = new google.auth.GoogleAuth({
-            credentials: {
-                client_email: credentials.client_email,
-                private_key: credentials.private_key,
-            },
-            scopes: ['https://www.googleapis.com/auth/spreadsheets'],
-        });
+        const auth = new google.auth.JWT(
+            credentials.client_email,
+            null,
+            credentials.private_key,
+            ['https://www.googleapis.com/auth/spreadsheets']
+        );
 
         const sheets = google.sheets({ version: 'v4', auth });
         console.log("Google Sheets client initialized.");
