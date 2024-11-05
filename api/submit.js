@@ -3,10 +3,10 @@ const { google } = require('googleapis');
 // Function to append data to Google Sheets
 async function appendToSheet(ordinalsAddress, status) {
     try {
-        // Parse credentials from environment variables
+        // Parse credentials from environment variables, decoding the base64 private key
         const credentials = {
             client_email: process.env.GOOGLE_CLIENT_EMAIL,
-            private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n') // Correct newline formatting
+            private_key: Buffer.from(process.env.GOOGLE_PRIVATE_KEY, 'base64').toString('utf-8')
         };
         console.log("Credentials parsed successfully.");
 
