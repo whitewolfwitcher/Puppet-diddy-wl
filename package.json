@@ -2,7 +2,7 @@
   "name": "puppet-diddy-wl",
   "version": "1.0.0",
   "scripts": {
-    "start": "node api/index.js"
+    "start": "node api/submit.js"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
