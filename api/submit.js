@@ -3,10 +3,9 @@ const { google } = require('googleapis');
 // Function to append data to Google Sheets
 async function appendToSheet(ordinalsAddress, status) {
     try {
-        // Parse credentials from environment variables, decoding the base64 private key
         const credentials = {
             client_email: process.env.GOOGLE_CLIENT_EMAIL,
-            private_key: Buffer.from(process.env.GOOGLE_PRIVATE_KEY, 'base64').toString('utf-8')
+            private_key: process.env.GOOGLE_PRIVATE_KEY
         };
         console.log("Credentials parsed successfully.");
 
@@ -22,11 +21,9 @@ async function appendToSheet(ordinalsAddress, status) {
 
         const request = {
             spreadsheetId: process.env.SPREADSHEET_ID,
-            range: 'diddy', // Adjust this to your sheet's range or name
+            range: 'diddy',
             valueInputOption: 'RAW',
-            resource: {
-                values: [[ordinalsAddress, status]],
-            },
+            resource: { values: [[ordinalsAddress, status]] },
         };
 
         const response = await sheets.spreadsheets.values.append(request);
@@ -56,7 +53,6 @@ module.exports = async (req, res) => {
             await appendToSheet(ordinalsAddress, status);
             console.log("appendToSheet call successful");
 
-            // Send success message and Twitter redirect URL back to the frontend
             const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
                 `🚀 Diddylist Alert!\n\nJoining the DiddyPuppets whitelist 🐶✨\n\nHere’s my address: ${ordinalsAddress}\n\nGet in on the action and apply here: ord.io/...`
             )}`;
