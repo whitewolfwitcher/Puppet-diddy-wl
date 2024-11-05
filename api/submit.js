@@ -4,7 +4,10 @@ const { google } = require('googleapis');
 async function appendToSheet(ordinalsAddress, status) {
     try {
         // Parse credentials from environment variables
-        const credentials = JSON.parse(process.env.GOOGLE_CREDENTIALS);
+        const credentials = {
+            client_email: process.env.GOOGLE_CLIENT_EMAIL,
+            private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n') // Correct newline formatting
+        };
         console.log("Credentials parsed successfully.");
 
         const auth = new google.auth.JWT(
