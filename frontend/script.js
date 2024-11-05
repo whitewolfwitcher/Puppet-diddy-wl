@@ -10,7 +10,7 @@ document.getElementById("submission-form").addEventListener("submit", async func
 
     try {
         // Use the full deployment URL for the API endpoint
-        const response = await fetch("https://puppet-diddy-wl.vercel.app/api/submit", {
+        const response = await fetch("https://puppet-diddy-wl-1f652d904952.herokuapp.com/api/submit", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
